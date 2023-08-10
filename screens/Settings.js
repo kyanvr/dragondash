@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Button, Text } from "react-native";
 import { clearUserData, getAllTables } from "../utils/databaseUtils";
-import Toast from "../components/Toast";
+import Toast from "../components/ui/Toast";
 
 const Settings = () => {
 	const [userDataCleared, setUserDataCleared] = useState(false);
@@ -18,7 +18,7 @@ const Settings = () => {
 		<View
 			style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
 		>
-			<Text style={{ fontSize: 20 }}>Settings</Text>
+			<Text style={{ fontSize: 20, fontFamily: "DragonHunter" }}>Settings</Text>
 			{userDataCleared && <Text>User data has been cleared.</Text>}
 			<Button title="Clear User Data" onPress={handleClearUserData} />
             <Button title="Get All Tables" onPress={getAllTables} />

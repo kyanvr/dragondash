@@ -3,14 +3,13 @@ import {
 	View,
 	Text,
 	TouchableOpacity,
-	Modal,
 	Button,
 	Image,
 	StyleSheet,
 } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
 import ProgressBar from "react-native-progress/Bar";
-import CustomModal from "./Modal";
+import CustomModal from "./ui/Modal";
 
 const ChallengeCard = ({ challengeTitle, description, imageSource, totalSteps, completedSteps }) => {
 	const [modalVisible, setModalVisible] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
-import CustomModal from "./Modal";
+import CustomModal from "./ui/Modal";
 
 const StepCountPopup = ({ visible, steps, onClose }) => {
 	return (

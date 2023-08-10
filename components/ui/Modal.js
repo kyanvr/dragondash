@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, View, Text, Button, StyleSheet } from "react-native";
-import { primaryColor, secondaryColor } from "../constants/colors";
+import { primaryColor, secondaryColor } from "../../constants/colors";
 
 const CustomModal = ({ visible, onClose, title, children }) => {
 	return (
