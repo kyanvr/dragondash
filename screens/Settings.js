@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { View, Button, Text } from "react-native";
-import { clearUserData, getAllTables } from "../utils/databaseUtils";
+import { View, Text, StyleSheet } from "react-native";
+import { clearUserData } from "../utils/dataBaseUtils";
 import Toast from "../components/ui/Toast";
+import CustomButton from "../components/ui/Button";
+import { SafeAreaView } from "react-native";
+import { ImageBackground } from "react-native";
+import backgroundImage from "../assets/background.png";
+import { secondaryColor } from "../constants/colors";
 
 const Settings = () => {
 	const [userDataCleared, setUserDataCleared] = useState(false);
+	const [isBatterySaverActive, setIsBatterySaverActive] = useState(false);
 
 	const handleClearUserData = () => {
 		// Clear the user data
@@ -14,23 +20,60 @@ const Settings = () => {
 		setUserDataCleared(true);
 	};
 
-	return (
-		<View
-			style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-		>
-			<Text style={{ fontSize: 20, fontFamily: "DragonHunter" }}>Settings</Text>
-			{userDataCleared && <Text>User data has been cleared.</Text>}
-			<Button title="Clear User Data" onPress={handleClearUserData} />
-            <Button title="Get All Tables" onPress={getAllTables} />
+	const toggleBatterySaver = () => {
+		setIsBatterySaverActive(!isBatterySaverActive);
+		// Implement logic based on the new value
+	};
 
-			{/* Show the CustomToast component */}
-			<Toast
-				message="User Data Cleared"
-				isVisible={userDataCleared}
-				hideToast={() => setUserDataCleared(false)}
-			/>
-		</View>
+	return (
+		<SafeAreaView style={styles.safeArea}>
+			<ImageBackground
+				source={backgroundImage}
+				style={styles.imageBackground}
+			>
+				<View
+					style={styles.container}
+				>
+					<Text style={styles.heading}>Settings</Text>
+					{userDataCleared && (
+						<Text>User data has been cleared.</Text>
+					)}
+					<CustomButton
+						title="Clear User Data"
+						onPress={handleClearUserData}
+						style={{ width: 200, marginTop: 20 }}
+					/>
+					<Toast
+						message="User Data Cleared"
+						isVisible={userDataCleared}
+						hideToast={() => setUserDataCleared(false)}
+					/>
+				</View>
+			</ImageBackground>
+		</SafeAreaView>
 	);
 };
+
+const styles = StyleSheet.create({
+	heading: {
+		fontSize: 32,
+		fontFamily: "DragonHunter",
+		marginTop: 50,
+		color: secondaryColor,
+		marginTop: 80,
+	},
+	safeArea: {
+		flex: 1,
+	},
+	imageBackground: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center",
+	},
+	container: {
+		flex: 1,
+		alignItems: "center",
+	},
+});
 
 export default Settings;

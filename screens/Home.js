@@ -1,50 +1,66 @@
 import React, { useEffect, useState } from "react";
-import {
-	View,
-	Text,
-	Button,
-	ImageBackground,
-	SafeAreaView,
-	StyleSheet,
-} from "react-native";
+import { View, ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import StepCounter from "../components/StepCounter";
 import image from "../assets/background.png";
 import AlertDialog from "../components/AlertDialog";
-import * as SQLite from "expo-sqlite";
-import formatDateToString from "../utils/formatDateToString";
 import StepCountPopup from "../components/StepCountPopup";
+import CustomButton from "../components/ui/Button";
+import {
+	checkIfAlreadyInitialized,
+	saveStepCountToDatabase,
+} from "../utils/dataBaseUtils";
+import Start from "./Start";
+import * as SQLite from "expo-sqlite";
+import LevelProgressBar from "../components/LevelProgressBar";
+import { useIsFocused } from "@react-navigation/native";
 
 const Home = () => {
 	const [showStepCounter, setShowStepCounter] = useState(false);
 	const [stepCount, setStepCount] = useState(0);
 	const [showPopup, setShowPopup] = useState(false);
+	const [alreadyInit, setAlreadyInit] = useState(false);
+	const [userData, setUserData] = useState({});
+
+	const isFocused = useIsFocused();
 
 	const db = SQLite.openDatabase("example.db");
 
 	const title = "Stop counting";
 	const message = "Are you sure you want to stop counting?";
-	const btnText = "Stop";
+	const btnText = "Stop counting";
 
+	// Check if the user has already initialized the app
 	useEffect(() => {
-		// Check if the database has no index value
+		if (isFocused) {
+			checkIfAlreadyInitialized()
+				.then((result) => {
+					setAlreadyInit(result);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+
+			fetchUserData();
+		}
+	}, [isFocused]);
+
+	const fetchUserData = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"SELECT * FROM card_indices;",
+				"SELECT * FROM user;",
 				null,
-				(txObj, resultSet) => {
-					if (resultSet.rows.length === 0) {
-						// If the database has no index value, set the index to 0
-						navigator.navigate("Start");
-					}
+				(_, resultSet) => {
+					setUserData(resultSet.rows._array);
+				},
+				(_, error) => {
+					console.error("Database error:", error); // Log the error
 				}
 			);
 		});
-	}, []);
-
+	};
 
 	const handleStart = () => {
 		setShowStepCounter(true);
-		setStepCount(0);
 		setShowPopup(false);
 	};
 
@@ -55,35 +71,20 @@ const Home = () => {
 	};
 
 	const handlePopupClose = () => {
-		// Close the popup when the user clicks the "Close" button
 		setShowPopup(false);
 	};
 
-	const saveStepCountToDatabase = (steps, date) => {
-		const db = SQLite.openDatabase("example.db");
-
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS step_count (steps NUMBER, date DATETIME);"
-			);
-		});
-
-		db.transaction((tx) => {
-			tx.executeSql(
-				"INSERT INTO step_count (steps, date) VALUES (?, ?);",
-				[steps, formatDateToString(date)],
-				() => {
-					setStepCount(steps);
-				},
-				(txObj, error) => console.log(error)
-			);
-		});
-	};
-
 	const handleStepChange = (steps) => {
-		// Update the step count in the Home component whenever it changes in the StepCounter component
 		setStepCount(steps);
 	};
+
+	const handleInitialize = () => {
+		setAlreadyInit(true);
+	};
+
+	if (!alreadyInit) {
+		return <Start onStart={handleInitialize} />;
+	}
 
 	return (
 		<SafeAreaView>
@@ -93,17 +94,26 @@ const Home = () => {
 				style={styles.image}
 			>
 				<View style={styles.container}>
+					{userData.length > 0 && (
+						<LevelProgressBar
+							level={userData[0].level}
+							xp={userData[0].xp}
+						/>
+					)}
 					{!showStepCounter ? (
-						<>
-							<Button title="Start" onPress={handleStart} />
+						<View style={styles.stepCountStart}>
+							<CustomButton
+								title={"Start"}
+								onPress={handleStart}
+							/>
 							<StepCountPopup
 								visible={showPopup}
 								steps={stepCount}
 								onClose={handlePopupClose}
 							/>
-						</>
+						</View>
 					) : (
-						<>
+						<View style={styles.stepCount}>
 							<StepCounter onStepChange={handleStepChange} />
 							<AlertDialog
 								title={title}
@@ -111,7 +121,7 @@ const Home = () => {
 								btnText={btnText}
 								onOKPress={handleStop}
 							/>
-						</>
+						</View>
 					)}
 				</View>
 			</ImageBackground>
@@ -124,13 +134,22 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+		height: "100%",
 	},
 	title: {
 		fontSize: 32,
-		fontWeight: "bold",
+		fontFamily: "DragonHunter",
 	},
 	image: {
 		height: "100%",
+	},
+	stepCountStart: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	stepCount: {
+		height: 300,
 	},
 });
 

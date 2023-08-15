@@ -15,17 +15,22 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
-    "expo": "^49.0.3",
+    "expo": "^49.0.7",
+    "expo-app-loading": "^2.1.1",
     "expo-asset": "~8.10.1",
     "expo-document-picker": "~11.5.4",
     "expo-file-system": "~15.4.2",
+    "expo-font": "~11.4.0",
     "expo-permissions": "~14.2.1",
     "expo-sensors": "~12.3.0",
+    "expo-splash-screen": "~0.20.5",
     "expo-sqlite": "~11.3.2",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.3",
+    "react-native-animated-pagination-dots": "^0.1.73",
     "react-native-chart-kit": "^6.12.0",
+    "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "^2.12.1",
     "react-native-google-fit": "^0.19.1",
     "react-native-modal": "^13.0.1",
@@ -37,8 +42,7 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-vector-icons": "^10.0.0",
     "tamagui": "^1.49.7",
-    "expo-font": "~11.4.0",
-    "expo-splash-screen": "~0.20.5"
+    "expo-brightness": "~11.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

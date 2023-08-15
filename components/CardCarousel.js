@@ -1,53 +1,53 @@
-import * as React from "react";
-import { Button, Dimensions, Image, Text, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, Dimensions, StyleSheet } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
+import CarouselItem from "./CarouselItem";
+import PaginationDots from "./PaginationDots";
+import PropTypes from "prop-types";
 
-const CardCarousel = ({ data, handleContinue }) => {
+const CardCarousel = ({ data, onContinue }) => {
 	const width = Dimensions.get("window").width - 40;
+	const carouselRef = useRef();
+	const [activeIndex, setActiveIndex] = useState(0);
+
+	const handleIndexChanged = (index) => {
+		setActiveIndex(index);
+	};
 
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={styles.container}>
 			<Carousel
-            	mode="parallax"
+				mode="parallax-horizontal"
+				loop={false}
 				snapEnabled={true}
 				width={width}
-				height={width}
+				height={500}
 				autoPlay={false}
 				data={data}
-				scrollAnimationDuration={1000}
-				renderItem={({ item, index }) => (
-					<View
-						style={{
-							flex: 1,
-							justifyContent: "center",
-                            borderRadius: 10,
-                            alignItems: "center",
-						}}
-					>
-                        <Image source={item.image} style={styles.image} />
-						<Text style={styles.text}>
-							{index}
-						</Text>
-						<Button title="Continue" onPress={() => handleContinue(index)}>Continue</Button>
-					</View>
+				scrollAnimationDuration={500}
+				renderItem={({ item }) => (
+					<CarouselItem item={item} onContinue={onContinue} />
 				)}
+				onSnapToItem={handleIndexChanged}
+				ref={carouselRef}
 			/>
+			<PaginationDots totalDots={data.length} activeIndex={activeIndex} />
 		</View>
 	);
-}
-
-const styles = {
-    image: {
-        width: "100%",
-        height: "100%",
-        resizeMode: "contain",
-    },
-    text: {
-        color: "white",
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: "center",
-    },
 };
+
+CardCarousel.propTypes = {
+	data: PropTypes.array.isRequired,
+	onContinue: PropTypes.func.isRequired
+};
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center"
+	}
+})
+
 
 export default CardCarousel;

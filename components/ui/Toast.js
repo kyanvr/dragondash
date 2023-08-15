@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { Text, StyleSheet, Animated } from "react-native";
+import PropTypes from "prop-types";
 
 const Toast = ({ message, isVisible, hideToast }) => {
 	const [fadeAnim] = useState(new Animated.Value(0));
@@ -27,6 +28,12 @@ const Toast = ({ message, isVisible, hideToast }) => {
 			<Text style={styles.toastText}>{message}</Text>
 		</Animated.View>
 	);
+};
+
+Toast.propTypes = {
+	message: PropTypes.string.isRequired,
+	isVisible: PropTypes.bool.isRequired,
+	hideToast: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

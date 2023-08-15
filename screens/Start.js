@@ -9,60 +9,20 @@ import {
 } from "react-native";
 import image from "../assets/background.png";
 import CardCarousel from "../components/CardCarousel";
-import * as SQLite from "expo-sqlite";
-import { useNavigation } from "@react-navigation/native";
+import { guidelineData, guidelines } from "../constants/guidelines";
+import { setInitStatus } from "../utils/dataBaseUtils";
+import { secondaryColor } from "../constants/colors";
 
-const Start = () => {
+function Start({ onStart }) {
 	const [showCarousel, setShowCarousel] = useState(false);
 	const moveAnim = useRef(new Animated.Value(0)).current;
 	const fadeInAnim = useRef(new Animated.Value(0)).current;
-	const db = SQLite.openDatabase("example.db");
-	const navigation = useNavigation(); // Get the navigation object
-	const level = 1;
-	const xp = 0;
-
-	const CardData = [
-		{
-			name: "Card 1",
-			size: "Large",
-			wingSpan: "10m",
-			color: "Red",
-			image: require("../assets/card1.png"),
-		},
-		{
-			name: "Card 2",
-			size: "Small",
-			wingSpan: "5m",
-			color: "Blue",
-			image: require("../assets/card1.png"),
-		},
-		{
-			name: "Card 3",
-			size: "Medium",
-			wingSpan: "7.5m",
-			color: "Green",
-			image: require("../assets/card1.png"),
-		},
-	];
 
 	useEffect(() => {
 		setTimeout(() => {
 			moveUp();
 		}, 1000);
 
-		// Check if the database already has an index value
-		db.transaction((tx) => {
-			tx.executeSql(
-				"SELECT * FROM card_indices;",
-				null,
-				(txObj, resultSet) => {
-					if (resultSet.rows.length > 0) {
-						// If the index value exists, navigate to the Home screen
-						navigation.navigate("Home");
-					}
-				}
-			);
-		});
 	}, []);
 
 	const moveUp = () => {
@@ -85,70 +45,10 @@ const Start = () => {
 		}).start();
 	};
 
-	const handleContinue = (index) => {
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS card_indices (index_value NUMBER);"
-			);
-
-			console.log("Table created successfully");
-		});
-
-		
-		db.transaction((tx) => {
-			tx.executeSql(
-				"INSERT INTO card_indices (index_value) VALUES (?);",
-				[index],
-				(txObj, resultSet) => {
-					console.log("Index inserted into the database:", index);
-					// Add any additional logic you want to perform after insertion.
-				},
-				(txObj, error) => console.log(error)
-				);
-			});
-			
-			navigation.navigate("Home");
-		};
-		
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS user_level (level NUMBER);"
-			);
-
-			console.log("Table created successfully");
-		});
-
-		db.transaction((tx) => {
-			tx.executeSql(
-				"INSERT INTO user_level (level) VALUES (?);",
-				[level],
-				(txObj, resultSet) => {
-					console.log("Level inserted into the database:", level);
-					// Add any additional logic you want to perform after insertion.
-				},
-				(txObj, error) => console.log(error)
-			);
-		});
-
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS user_xp (xp NUMBER);"
-			);
-
-			console.log("Table created successfully");
-		});
-
-		db.transaction((tx) => {
-			tx.executeSql(
-				"INSERT INTO user_xp (xp) VALUES (?);",
-				[xp],
-				(txObj, resultSet) => {
-					console.log("XP inserted into the database:", xp);
-					// Add any additional logic you want to perform after insertion.
-				},
-				(txObj, error) => console.log(error)
-			);
-		});
+	const handleContinue = () => {
+		setInitStatus();
+		onStart();
+	};
 
 	return (
 		<SafeAreaView>
@@ -184,16 +84,16 @@ const Start = () => {
 							]}
 						>
 							<CardCarousel
-								data={CardData}
-								handleContinue={handleContinue}
-							/>
+								data={guidelines}
+								onContinue={handleContinue}
+							 />
 						</Animated.View>
 					)}
 				</View>
 			</ImageBackground>
 		</SafeAreaView>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	image: {
@@ -209,11 +109,12 @@ const styles = StyleSheet.create({
 	text: {
 		color: "white",
 		fontSize: 40,
-		fontWeight: "bold",
 		position: "absolute",
+		fontFamily: "DragonHunter",
+		color: secondaryColor,
 	},
 	carouselContainer: {
-		marginTop: 300, // Adjust this value to control the position of the carousel
+		marginTop: 50, // Adjust this value to control the position of the carousel
 	},
 });
 

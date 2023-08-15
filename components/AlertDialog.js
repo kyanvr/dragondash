@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Alert, View, StyleSheet } from "react-native";
+import { Alert, View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
+import CustomButton from "./ui/Button";
 
 const AlertDialog = ({ title, message, btnText, onOKPress }) => {
 	const showAlert = () => {
@@ -27,7 +28,7 @@ const AlertDialog = ({ title, message, btnText, onOKPress }) => {
 
 	return (
 		<View style={styles.container}>
-			<Button title={btnText} onPress={showAlert} />
+			<CustomButton title={btnText} onPress={showAlert} />
 		</View>
 	);
 };
@@ -44,23 +45,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-	},
-	// Customize your dialog styles here
-	dialogContainer: {
-		backgroundColor: "#F0E6D2", // Light fantasy color
-		padding: 20,
-		borderRadius: 10,
-		width: "80%",
-		elevation: 5, // Add shadow for a card-like effect
-	},
-	dialogTitle: {
-		fontSize: 20,
-		fontWeight: "bold",
-		marginBottom: 10,
-	},
-	dialogMessage: {
-		fontSize: 16,
-		marginBottom: 20,
 	},
 });
 

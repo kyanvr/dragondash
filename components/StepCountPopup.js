@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
 import CustomModal from "./ui/Modal";
+import PropTypes from "prop-types";
 
 const StepCountPopup = ({ visible, steps, onClose }) => {
 	return (
@@ -15,6 +16,12 @@ const StepCountPopup = ({ visible, steps, onClose }) => {
 			</Text>
 		</CustomModal>
 	);
+};
+
+StepCountPopup.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	steps: PropTypes.number.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	stepCountText: {
 		fontSize: 18,
-		marginBottom: 20,
+		marginTop: 20,
 		color: secondaryColor,
 	},
 });
