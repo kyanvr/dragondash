@@ -29,9 +29,7 @@ const Statistics = () => {
 		}
 	}, [isFocused]);
 
-	// Update the user's level and xp based on the step count data
 	useEffect(() => {
-		// update user level when xp changes
 			if (userData.length > 0) {
 				const newLevel = updateLevel(
 					userData[0].level,
@@ -80,7 +78,6 @@ const Statistics = () => {
 		});
 	};
 
-	// Fetch the step count data from the database
 	const fetchStepCountData = () => {
 		db.transaction((tx) => {
 			tx.executeSql(
@@ -107,7 +104,7 @@ const Statistics = () => {
 			}
 		}
 
-		return 0; // Default to 0 if invalid input
+		return 0;
 	};
 
 	// Transform the stepCountData to aggregate steps for the same day
@@ -173,7 +170,6 @@ const Statistics = () => {
 						</View>
 
 						{
-							// Only show the chart if there is data else show a message
 							stepCountData.length > 0 ? (
 								<LineChart
 									data={formattedData}

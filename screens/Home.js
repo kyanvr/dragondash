@@ -43,7 +43,7 @@ const Home = () => {
 
 			fetchUserData();
 		}
-	}, [isFocused]);
+	}, [isFocused, userData]);
 
 	const fetchUserData = () => {
 		db.transaction((tx) => {
