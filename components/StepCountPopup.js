@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
 import CustomModal from "./ui/Modal";
 import PropTypes from "prop-types";

@@ -46,20 +46,6 @@ const Achievements = () => {
 		setIsLoading(false);
 	}, [isFocused, completedAchievements]);
 
-	// check for completed achievements
-	// useEffect(() => {
-	// 	if (completedAchievements.length > 0) {
-	// 		achievements.forEach((achievement) => {
-	// 			completedAchievements.forEach((completedAchievement) => {
-	// 				if (achievement.id === completedAchievement.id) {
-	// 					achievement.completed = 1;
-	// 					console.log(achievement.completed);
-	// 				}
-	// 			});
-	// 		});
-	// 	}
-	// }, [completedAchievements]);
-
 	const getCompletedAchievements = () => {
 		db.transaction((tx) => {
 			tx.executeSql(

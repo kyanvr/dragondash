@@ -10,7 +10,6 @@ import { secondaryColor } from "../constants/colors";
 
 const Settings = () => {
 	const [userDataCleared, setUserDataCleared] = useState(false);
-	const [isBatterySaverActive, setIsBatterySaverActive] = useState(false);
 
 	const handleClearUserData = () => {
 		// Clear the user data
@@ -18,11 +17,6 @@ const Settings = () => {
 
 		// Once user data is cleared, set the state to indicate it
 		setUserDataCleared(true);
-	};
-
-	const toggleBatterySaver = () => {
-		setIsBatterySaverActive(!isBatterySaverActive);
-		// Implement logic based on the new value
 	};
 
 	return (

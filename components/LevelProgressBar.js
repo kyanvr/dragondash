@@ -16,7 +16,6 @@ const LevelProgressBar = ({ level, xp }) => {
 
 	const { xpToNextLevel } = currentLevelObject;
 	const progress = (xp / xpToNextLevel) * 100;
-	const xpNeeded = xpToNextLevel - xp;
 
 	return (
 		<View style={styles.container}>

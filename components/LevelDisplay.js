@@ -5,10 +5,10 @@ import { secondaryColor } from "../constants/colors";
 import Dragon from "./Dragon";
 import { Dimensions } from "react-native";
 import PropTypes from "prop-types";
+import screenWidth from "../constants/screenWidth";
 
 const LevelDisplay = ({ level, xp, xpToNextLevel, xpNeeded }) => {
 	const progress = xp / (xpToNextLevel + xp);
-	const screenWidth = Dimensions.get("window").width - 80;
 
 	return (
 		<View style={styles.container}>

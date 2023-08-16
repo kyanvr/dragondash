@@ -4,9 +4,9 @@ import Carousel from "react-native-reanimated-carousel";
 import CarouselItem from "./CarouselItem";
 import PaginationDots from "./PaginationDots";
 import PropTypes from "prop-types";
+import screenWidth from "../constants/screenWidth";
 
 const CardCarousel = ({ data, onContinue }) => {
-	const width = Dimensions.get("window").width - 40;
 	const carouselRef = useRef();
 	const [activeIndex, setActiveIndex] = useState(0);
 
@@ -20,7 +20,7 @@ const CardCarousel = ({ data, onContinue }) => {
 				mode="parallax-horizontal"
 				loop={false}
 				snapEnabled={true}
-				width={width}
+				width={screenWidth}
 				height={500}
 				autoPlay={false}
 				data={data}

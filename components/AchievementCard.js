@@ -12,6 +12,7 @@ import CustomModal from "./ui/Modal";
 import { setAchievementCompleted, setXp } from "../utils/dataBaseUtils";
 import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
+import screenWidth from "../constants/screenWidth";
 
 const Achievement = ({
 	id,
@@ -83,7 +84,7 @@ const Achievement = ({
 
 				<Progress.Bar
 					progress={progress}
-					width={200}
+					width={screenWidth * 0.8}
 					color={secondaryColor}
 				/>
 			</CustomModal>

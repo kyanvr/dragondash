@@ -14,13 +14,13 @@ import backgroundImage from "../assets/background.png";
 import { Dimensions } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
 import Levels from "../constants/levels";
+import screenWidth from "../constants/screenWidth";
 
 const Statistics = () => {
 	const [userData, setUserData] = useState([]);
 	const [stepCountData, setStepCountData] = useState([]);
 	const db = SQLite.openDatabase("example.db");
 	const isFocused = useIsFocused();
-	const screenWidth = Dimensions.get("window").width - 80;
 
 	useEffect(() => {
 		if (isFocused) {
