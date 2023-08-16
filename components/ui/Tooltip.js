@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		top: 30, // Adjust this value as needed
 		left: 0, // Adjust this value as needed
-        width: 300,
+        width: 200,
 	},
 	tooltipText: {
 		color: "white",

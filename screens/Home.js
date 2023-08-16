@@ -97,7 +97,7 @@ const Home = () => {
 				<View style={styles.tooltip}>
 					<CustomTooltip
 						text={
-							"Arteveldehogeschool, opleiding Grafische en Digitale Media"
+							"Arteveldehogeschool, Grafische en Digitale Media"
 						}
 						iconName={"information-circle"}
 						style={styles.tooltip}
