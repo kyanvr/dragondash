@@ -6,8 +6,6 @@ https://github.com/kyanvr/dragondash.git
 
 ## Tech
 
-App
-
 -   React Native x Expo
 -   SQLite
 
