@@ -13,7 +13,6 @@ const StepCounter = ({ onStepChange }) => {
 	const [subscription, setSubscription] = useState(null);
 
 	useEffect(() => {
-		// Check if the accelerometer is available on the device
 		checkSensorsAvailability();
 
 		return () => {
@@ -23,7 +22,6 @@ const StepCounter = ({ onStepChange }) => {
 	}, []);
 
 	useEffect(() => {
-		// Notify the parent component of step changes
 		if (onStepChange) {
 			onStepChange(steps);
 		}

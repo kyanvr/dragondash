@@ -35,6 +35,8 @@ const Statistics = () => {
 					userData[0].xp,
 					Levels
 				);
+				// Update the level in the database if it has changed
+				// This is to ensure that the level is always up to date
 				if (newLevel !== userData[0].level) {
 					db.transaction((tx) => {
 						tx.executeSql(
@@ -53,6 +55,7 @@ const Statistics = () => {
 	}, [userData]);
 
 	const updateLevel = (currentLevel, currentXP, levels) => {
+		// Find the next level that has a higher xpToNextLevel than the currentXP
 		const nextLevel = levels.find((level) => level.xpToNextLevel > currentXP);
 
 		if (nextLevel) {
@@ -92,7 +95,7 @@ const Statistics = () => {
 		});
 	};
 
-	// calculate how much xp is needed for the next level based on the level object
+	// Calculate how much xp is needed for the next level based on the level object
 	const calculateXpToNextLevel = (currentLevel) => {
 		if (currentLevel >= 1 && currentLevel <= Levels.length) {
 			const currentLevelObject = Levels[currentLevel - 1];

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image } from "react-native";
 import CustomButton from "./ui/Button";
 import { SafeAreaView } from "react-native";
 import { secondaryColor } from "../constants/colors";

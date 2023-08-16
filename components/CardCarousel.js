@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import CarouselItem from "./CarouselItem";
 import PaginationDots from "./PaginationDots";

@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from "react-native";
 import * as Progress from "react-native-progress";
 import { secondaryColor } from "../constants/colors";
 import Dragon from "./Dragon";
-import { Dimensions } from "react-native";
 import PropTypes from "prop-types";
 import screenWidth from "../constants/screenWidth";
 

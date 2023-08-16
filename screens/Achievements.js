@@ -32,9 +32,10 @@ const Achievements = () => {
 			.catch((error) => {
 				console.log(error);
 			});
-
+		// Update the completed achievements when the screen is focused
 		if (completedAchievements.length > 0) {
 			achievements.forEach((achievement) => {
+				// If the achievement is in the completedAchievements array, set the completed property to 1
 				completedAchievements.forEach((completedAchievement) => {
 					if (achievement.id === completedAchievement.id) {
 						achievement.completed = 1;
