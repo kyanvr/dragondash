@@ -46,7 +46,7 @@ const StepCounter = ({ onStepChange }) => {
 	const subscribeToAccelerometer = () => {
 		// Subscribe to accelerometer updates
 		const newSubscription = Accelerometer.addListener(({ x, y, z }) => {
-			// Calculate acceleration
+			// Calculate acceleration using the Euclidean norm
 			const acceleration = Math.sqrt(x ** 2 + y ** 2 + z ** 2);
 
 			// Increment step count if acceleration is above threshold
