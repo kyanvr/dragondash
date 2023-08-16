@@ -26,8 +26,12 @@ const Statistics = () => {
 		if (isFocused) {
 			fetchUserData();
 			fetchStepCountData();
+		}
+	}, [isFocused]);
 
-			// update user level when xp changes
+	// Update the user's level and xp based on the step count data
+	useEffect(() => {
+		// update user level when xp changes
 			if (userData.length > 0) {
 				const newLevel = updateLevel(
 					userData[0].level,
@@ -49,8 +53,7 @@ const Statistics = () => {
 					});
 				}
 			}
-		}
-	}, [isFocused]);
+	}, [userData]);
 
 	const updateLevel = (currentLevel, currentXP, levels) => {
 		const nextLevel = levels.find((level) => level.xpToNextLevel > currentXP);

@@ -13,6 +13,7 @@ import Start from "./Start";
 import * as SQLite from "expo-sqlite";
 import LevelProgressBar from "../components/LevelProgressBar";
 import { useIsFocused } from "@react-navigation/native";
+import CustomTooltip from "../components/ui/Tooltip";
 
 const Home = () => {
 	const [showStepCounter, setShowStepCounter] = useState(false);
@@ -93,6 +94,15 @@ const Home = () => {
 				resizeMode="cover"
 				style={styles.image}
 			>
+				<View style={styles.tooltip}>
+					<CustomTooltip
+						text={
+							"Arteveldehogeschool, opleiding Grafische en Digitale Media"
+						}
+						iconName={"information-circle"}
+						style={styles.tooltip}
+					/>
+				</View>
 				<View style={styles.container}>
 					{userData.length > 0 && (
 						<LevelProgressBar
@@ -150,6 +160,11 @@ const styles = StyleSheet.create({
 	},
 	stepCount: {
 		height: 300,
+	},
+	tooltip: {
+		position: "absolute",
+		top: 80,
+		left: 40
 	},
 });
 
