@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { clearUserData } from "../utils/dataBaseUtils";
+import { clearUserData } from "../utils/databaseUtils";
 import Toast from "../components/ui/Toast";
 import CustomButton from "../components/ui/Button";
 import { SafeAreaView } from "react-native";

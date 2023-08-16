@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Navigation from "./navigation/Navigation";
 import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { initApp } from "./utils/dataBaseUtils";
+import { initApp } from "./utils/databaseUtils";
 import * as SplashScreen from "expo-splash-screen";
 
 import useFonts from "./hooks/useFonts";

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import ChallengeCard from "../components/AchievementCard";
 import backgroundImage from "../assets/background.png";
-import { getTotalStepsFromUser } from "../utils/dataBaseUtils";
+import { getTotalStepsFromUser } from "../utils/databaseUtils";
 import { achievements } from "../constants/achievements";
 import { useIsFocused } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";

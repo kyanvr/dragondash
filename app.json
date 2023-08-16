@@ -18,12 +18,15 @@
       "supportsTablet": true
     },
     "android": {
-		"adaptiveIcon": {
-			"foregroundImage": "./assets/adaptive-icon.png",
-			"backgroundColor": "#222222"
-		},
-		"permissions": ["android.permission.ACTIVITY_RECOGNITION"]
-	},
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#222222"
+      },
+      "permissions": [
+        "android.permission.ACTIVITY_RECOGNITION"
+      ],
+      "package": "com.kyjean.dragondash"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

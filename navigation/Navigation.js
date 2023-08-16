@@ -67,11 +67,9 @@ const Navigation = () => {
 				<Tab.Screen name="Home" component={Home} />
 				<Tab.Screen name="Achievements" component={Achievements} />
 				<Tab.Screen name="Statistics" component={Statistics} />
-				{
-					NODE_ENV === "development" && (
-						<Tab.Screen name="Settings" component={Settings} />
-					)
-				}
+				{NODE_ENV === "development" && (
+					<Tab.Screen name="Settings" component={Settings} />
+				)}
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

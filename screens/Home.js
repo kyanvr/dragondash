@@ -8,7 +8,7 @@ import CustomButton from "../components/ui/Button";
 import {
 	checkIfAlreadyInitialized,
 	saveStepCountToDatabase,
-} from "../utils/dataBaseUtils";
+} from "../utils/databaseUtils";
 import Start from "./Start";
 import * as SQLite from "expo-sqlite";
 import LevelProgressBar from "../components/LevelProgressBar";

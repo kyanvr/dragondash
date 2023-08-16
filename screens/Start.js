@@ -10,7 +10,7 @@ import {
 import image from "../assets/background.png";
 import CardCarousel from "../components/CardCarousel";
 import { guidelineData, guidelines } from "../constants/guidelines";
-import { setInitStatus } from "../utils/dataBaseUtils";
+import { setInitStatus } from "../utils/databaseUtils";
 import { secondaryColor } from "../constants/colors";
 
 function Start({ onStart }) {

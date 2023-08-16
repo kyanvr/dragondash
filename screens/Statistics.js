@@ -11,7 +11,6 @@ import { useIsFocused } from "@react-navigation/native";
 import * as SQLite from "expo-sqlite";
 import LevelDisplay from "../components/LevelDisplay";
 import backgroundImage from "../assets/background.png";
-import { Dimensions } from "react-native";
 import { primaryColor, secondaryColor } from "../constants/colors";
 import Levels from "../constants/levels";
 import screenWidth from "../constants/screenWidth";
@@ -187,7 +186,6 @@ const Statistics = () => {
 									No data to display
 								</Text>
 							)
-							
 						}
 					</View>
 				</View>
